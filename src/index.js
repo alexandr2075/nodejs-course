@@ -12,6 +12,11 @@ import { add } from "./add.js";
 import { rn } from "./rename.js";
 import { cp } from "./copy.js";
 import { mv } from "./move.js";
+import { rm } from "./remove.js";
+import { operSys } from "./os.js";
+import { hash } from "./hash.js";
+import { compress } from "./compress.js";
+import { decompress } from "./decompress.js";
 
 const userName = process.argv.slice(2).pop().split("=")[1];
 
@@ -38,6 +43,9 @@ async function processLineByLine() {
       case line === ".exit":
         handle();
         break;
+      case line.includes("os --"):
+        operSys(line);
+        break;
       case line === "up":
         up();
         break;
@@ -62,6 +70,19 @@ async function processLineByLine() {
       case line.includes("mv"):
         mv(line);
         break;
+      case line.includes("rm"):
+        rm(line);
+        break;
+      case line.includes("hash"):
+        hash(line);
+        break;
+      case line.includes("compress"):
+        compress(line);
+        break;
+      case line.includes("decompress"):
+        decompress(line);
+        break;
+
       default:
         console.log("There is no such command...");
         break;
